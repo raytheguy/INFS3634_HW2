@@ -30,7 +30,6 @@ public class DetailFragment extends Fragment {
     String selectedItem = "default";
     ImageView foodImgDetail;
     int selectedAmt;
-    int imageLoc;
 
     public DetailFragment() {
         // Required empty public constructor
@@ -56,12 +55,11 @@ public class DetailFragment extends Fragment {
         if (bundle != null) {
 //            System.out.println("Id that has passed is: " + bundle.getInt("itemid"));
             foodId = bundle.getInt("itemId");
-            imageLoc = bundle.getInt("imageId");
             //set food name, price and description
             foodName.setText(FoodDatabase.getFoodById(foodId).getItemName());
             foodPrice.setText("$" + String.valueOf(FoodDatabase.getFoodById(foodId).getPrice()));
             foodDesc.setText(FoodDatabase.getFoodById(foodId).getDescription());
-            foodImgDetail.setImageResource(imageLoc);
+            foodImgDetail.setImageResource(FoodDatabase.getFoodById(foodId).getImageId());
 
         }
 
@@ -75,11 +73,7 @@ public class DetailFragment extends Fragment {
         // Apply the adapter to the spinner
         amountSpinner.setAdapter(adapter);
 
-        //spinner item
-
-
-        //add button when you click on add
-        //Change to another fragment
+        //z5161354
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View myView) {
@@ -88,7 +82,7 @@ public class DetailFragment extends Fragment {
                 //convert to integer first for calculations
                 selectedAmt = Integer.parseInt(selectedItem);
                 //tester
-                System.out.println("Selected amount is " + selectedAmt);
+//                System.out.println("Selected amount is " + selectedAmt);
 
                 //add amount to database alongside item id and price
                 //tell use what they ordered
@@ -105,7 +99,9 @@ public class DetailFragment extends Fragment {
                 //add on to the item location of an integer array
                 //since the food items start from 1 but the array starts from 0, we must minus 1
                 //i.e. food item 5 should actually be in the 4th index of the array
+                System.out.println("The amount before adding is + " + Order.numberOfItems[foodId-1]);
                 Order.numberOfItems[foodId-1] = Order.numberOfItems[foodId-1]+selectedAmt;
+                System.out.println("The amount after adding is + " + Order.numberOfItems[foodId-1]);
 
             }
         });

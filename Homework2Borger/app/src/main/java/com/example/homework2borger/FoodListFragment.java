@@ -14,8 +14,6 @@ import java.util.ArrayList;
 
 public class FoodListFragment extends Fragment {
     public ConstraintLayout top;
-    //others from Adapter
-    public ArrayList<Integer> imageIds = new ArrayList<>();
 
     //layout manager
     RecyclerView.LayoutManager layoutManager;

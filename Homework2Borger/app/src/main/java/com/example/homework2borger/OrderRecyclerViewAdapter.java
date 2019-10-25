@@ -1,29 +1,24 @@
 package com.example.homework2borger;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import java.util.LinkedHashSet;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class OrderRecyclerViewAdapter extends RecyclerView.Adapter<OrderRecyclerViewAdapter.ViewHolder>{
+public class OrderRecyclerViewAdapter extends RecyclerView.Adapter<OrderRecyclerViewAdapter.ViewHolder> {
 
-    //ArrayList of Strings to Hold Imageids
-    public ArrayList<Integer> imageIds = new ArrayList<>();
     public Context mContext;
     ArrayList<Integer> myList;
-    int uniqueItemsAmt;
+    public int uniqueItemsAmt;
 
     //image view temporarily removed
     public OrderRecyclerViewAdapter(Context mContext) {
@@ -44,20 +39,24 @@ public class OrderRecyclerViewAdapter extends RecyclerView.Adapter<OrderRecycler
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder2, final int position) {
         //set the item name, price and image
-        //image not yet available
         //add 1 to position as food ids start from 1
-        System.out.println("!!!!!!!!!!!!!!!!!");
-        Set noDupeList = new HashSet(Order.itemId);
-        myList = new ArrayList(noDupeList);
+        LinkedHashSet<Integer> noDupeList = new LinkedHashSet<>(Order.itemId);
+        myList = new ArrayList<>(noDupeList);
         uniqueItemsAmt = myList.size();
+        System.out.println(myList);
+        System.out.println(uniqueItemsAmt);
         holder2.nameTextView.setText(FoodDatabase.getFoodById(myList.get(position)).getItemName());
-
+        System.out.println("The id that is get is: " + myList.get(position));
+        int foodIdUpTo = myList.get(position);
+//        holder2.foodImageView.setImageResource(FoodDatabase.getFoodById(position+1).getImageId());
         //find the amount of order
         //get the item id inside the array
         //next set the quantity as the amount inside the int array
-        int toGoIn = Order.itemId.get(position);
+        int toGoIn = Order.itemId.get(position)-1;
+        //get the number of items from the numberOfItems int Array
+        int toGoInNumberItems = Order.numberOfItems[toGoIn];
         //since the food items start from 1 but the array starts from 0, we must minus 1
-        holder2.quantityTextView.setText(String.valueOf(Order.numberOfItems[toGoIn-1]));
+        holder2.quantityTextView.setText(String.valueOf(toGoInNumberItems));
 
     }
 
@@ -77,6 +76,7 @@ public class OrderRecyclerViewAdapter extends RecyclerView.Adapter<OrderRecycler
         ConstraintLayout layoutMain;
         TextView nameTextView;
         TextView quantityTextView;
+        ImageView foodImageView;
 
 
         public ViewHolder(@NonNull View v) {
@@ -87,8 +87,9 @@ public class OrderRecyclerViewAdapter extends RecyclerView.Adapter<OrderRecycler
             layoutMain = v.findViewById(R.id.clickableCart);
             nameTextView = v.findViewById(R.id.foodNameCart);
             quantityTextView = v.findViewById(R.id.foodAmtCart);
+//            foodImageView = v.findViewById(R.id.foodImageCart);
 //Raymond z5161354
 
         }
-}
     }
+}

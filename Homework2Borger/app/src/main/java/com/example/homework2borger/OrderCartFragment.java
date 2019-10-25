@@ -25,19 +25,19 @@ public class OrderCartFragment extends Fragment {
         totalAmount = v2.findViewById(R.id.totalAmountText);
 
         double amountSum = 0;
-        for(int i = 0; i < Order.itemArrayTotal.size(); i++)
+        for (int i = 0; i < Order.itemArrayTotal.size(); i++)
             amountSum += Order.itemArrayTotal.get(i);
 
         //purposes of rounding
         double roundTotal = round(amountSum, 2);
-        totalAmount.setText("$"+String.valueOf(roundTotal));
+        totalAmount.setText("$" + String.valueOf(roundTotal));
 
         RecyclerView recyclerViewC = v2.findViewById(R.id.orderRecycle);
         layoutManager2 = new LinearLayoutManager(getActivity());
         OrderRecyclerViewAdapter adapterOrder = new OrderRecyclerViewAdapter(getActivity());
         recyclerViewC.setAdapter(adapterOrder);
         recyclerViewC.setLayoutManager(layoutManager2);
-        System.out.println("OnCreateView for Order Cart Fragment is Called");
+//        System.out.println("OnCreateView for Order Cart Fragment is Called");
         return v2;
     }
 

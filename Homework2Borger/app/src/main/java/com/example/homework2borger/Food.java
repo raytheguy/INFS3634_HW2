@@ -7,12 +7,14 @@ public class Food {
     protected String description;
     protected double price;
     protected int redundantId;
+    protected int imageId;
 
-    public Food(int itemId, String itemName, String description, double price) {
+    public Food(int itemId, String itemName, String description, double price, int imageId) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.description = description;
         this.price = price;
+        this.imageId = imageId;
     }
 
     public int getItemId() {
@@ -53,5 +55,13 @@ public class Food {
 
     public void setRedundantId(int redundantId) {
         this.redundantId = redundantId;
+    }
+
+    public int getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 }
