@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 //raymond wang z5161354
 
+    //creates the cases to switch between fragments
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
